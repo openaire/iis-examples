@@ -108,6 +108,17 @@
         </dependency>
         
     </dependencies>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr-runtime</artifactId>
+                <version>3.4</version>
+            </dependency>        
+        </dependencies>
+    </dependencyManagement>    
+    
     <build>
         <plugins>
             <!-- Plugin that generates Java classes from Avro schemas -->
