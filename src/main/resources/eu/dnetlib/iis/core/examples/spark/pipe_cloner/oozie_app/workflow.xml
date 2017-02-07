@@ -56,8 +56,7 @@
 
 			<class>eu.dnetlib.iis.common.spark.pipe.SparkPipeMapReduce</class>
 
-			<jar>${wf:conf('oozie.wf.application.path')}/lib/${projectUberJarName}
-			</jar>
+			<jar>${wf:conf('oozie.wf.application.path')}/lib/iis-wf-core-examples-${projectVersion}.jar</jar>
 
 			
 			<arg>-inputAvroPath = ${workingDir}/producer/person</arg>
