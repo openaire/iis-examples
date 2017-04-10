@@ -1,0 +1,12 @@
+.*
+!.gitignore
+!.gitkeep
+
+/*/target
+/target
+/*/build
+/build
+/*/bin
+/bin
+dependency-reduced-pom.xml
+*.pyc

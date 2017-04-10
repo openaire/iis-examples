@@ -54,6 +54,7 @@ public class SparkAvroCloner {
         SparkConf conf = new SparkConf();
        
         conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer");
+        conf.set("spark.driver.host", "localhost");
         
         Schema schema = AvroUtils.toSchema(params.avroSchemaClass);
         Job job = Job.getInstance();

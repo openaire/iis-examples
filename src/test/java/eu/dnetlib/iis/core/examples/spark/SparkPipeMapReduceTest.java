@@ -76,7 +76,7 @@ public class SparkPipeMapReduceTest {
                 .create()
                 
                 .setAppName("Spark Pipe WordCount")
-                
+                .addJobProperty("spark.driver.host", "localhost")                
                 .setMainClass(SparkPipeMapReduce.class)
                 .addArg("-inputAvroPath", inputDirPath)
                 .addArg("-inputAvroSchemaClass", Document.class.getName())
@@ -119,7 +119,7 @@ public class SparkPipeMapReduceTest {
                 .create()
                 
                 .setAppName("Spark Pipe Cloner")
-                
+                .addJobProperty("spark.driver.host", "localhost")
                 .setMainClass(SparkPipeMapReduce.class)
                 .addArg("-inputAvroPath", inputDirPath)
                 .addArg("-inputAvroSchemaClass", Person.class.getName())

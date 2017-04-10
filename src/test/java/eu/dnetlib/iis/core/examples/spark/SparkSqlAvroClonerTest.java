@@ -75,7 +75,7 @@ public class SparkSqlAvroClonerTest {
                                            .create()
                                            
                                            .setAppName("Spark SQL Avro Cloner")
-        
+                                           .addJobProperty("spark.driver.host", "localhost")
                                            .setMainClass(SparkSqlAvroCloner.class)
                                            .addArg("-avroSchemaClass", Person.class.getName())
                                            .addArg("-inputAvroPath", inputDirPath)
