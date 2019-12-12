@@ -20,10 +20,6 @@
                 <name>oozie.launcher.mapred.job.queue.name</name>
                 <value>${oozieLauncherQueueName}</value>
             </property>
-            <property>
-                <name>oozie.action.sharelib.for.spark</name>
-                <value>spark2</value>
-            </property>
         </configuration>
     </global>
 
@@ -55,12 +51,6 @@
             <name>spark_avro_cloner</name>
             <class>eu.dnetlib.iis.core.examples.spark.rdd.SparkAvroCloner</class>
             <jar>${wf:conf('oozie.wf.application.path')}/lib/iis-wf-core-examples-${projectVersion}.jar</jar>
-            <spark-opts>
-                --conf spark.extraListeners="com.cloudera.spark.lineage.NavigatorAppListener"
-                --conf spark.sql.queryExecutionListeners="com.cloudera.spark.lineage.NavigatorQueryListener"
-                --conf spark.yarn.historyServer.address="http://iis-ci-test.ocean.icm.edu.pl:18089"
-                --conf spark.eventLog.dir="hdfs://iis-ci-test.ocean.icm.edu.pl:8020/user/spark/spark2ApplicationHistory"
-            </spark-opts>
             <arg>-inputAvroPath = ${workingDir}/data_producer/person</arg>
             <arg>-avroSchemaClass = eu.dnetlib.iis.core.examples.schemas.documentandauthor.Person</arg>
             <arg>-outputAvroPath = ${workingDir}/spark_cloner_node/person</arg>
