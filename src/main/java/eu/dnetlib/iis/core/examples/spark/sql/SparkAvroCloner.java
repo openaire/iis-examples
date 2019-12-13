@@ -4,8 +4,8 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import eu.dnetlib.iis.common.spark.SparkSessionFactory;
+import eu.dnetlib.iis.common.spark.avro.AvroSaver;
 import eu.dnetlib.iis.common.utils.AvroUtils;
-import eu.dnetlib.iis.core.examples.spark.avro.AvroSaver;
 import org.apache.avro.Schema;
 import org.apache.avro.mapreduce.AvroJob;
 import org.apache.hadoop.mapreduce.Job;
@@ -29,8 +29,6 @@ import static org.apache.spark.sql.functions.*;
  * @author Łukasz Dumiszewski
  */
 public class SparkAvroCloner {
-
-    //------------------------ LOGIC --------------------------
 
     public static void main(String[] args) throws IOException {
         SparkClonerParameters params = new SparkClonerParameters();
@@ -58,8 +56,6 @@ public class SparkAvroCloner {
             AvroSaver.save(outputDf, schema, params.outputAvroPath);
         }
     }
-
-    //------------------------ PRIVATE --------------------------
 
     @Parameters(separators = "=")
     private static class SparkClonerParameters {

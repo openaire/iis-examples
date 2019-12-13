@@ -11,6 +11,7 @@ import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.split;
 
 public class PersonIdExtractor {
+
     public static void main(String[] args) {
         Preconditions.checkArgument(args.length == 2, "You must provide input file and output directory");
 

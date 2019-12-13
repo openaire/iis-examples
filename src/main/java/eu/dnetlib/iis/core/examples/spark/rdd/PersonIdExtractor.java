@@ -15,6 +15,8 @@ import org.apache.spark.api.java.JavaSparkContext;
  */
 public class PersonIdExtractor {
 
+    //------------------------ LOGIC --------------------------
+
     public static void main(String[] args) {
         Preconditions.checkArgument(args.length == 2, "You must provide input file and output directory");
 
