@@ -4,8 +4,9 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import eu.dnetlib.iis.common.spark.SparkSessionFactory;
-import eu.dnetlib.iis.common.spark.avro.AvroSaver;
+import eu.dnetlib.iis.common.spark.avro.AvroDataFrameSupport;
 import eu.dnetlib.iis.common.utils.AvroUtils;
+import eu.dnetlib.iis.core.examples.schemas.documentandauthor.Person;
 import org.apache.avro.Schema;
 import org.apache.avro.mapreduce.AvroJob;
 import org.apache.hadoop.mapreduce.Job;
@@ -13,6 +14,8 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.avro.SchemaConverters;
+import org.apache.spark.sql.types.StructType;
 
 import java.io.IOException;
 
@@ -44,16 +47,20 @@ public class SparkAvroCloner {
         conf.setAppName("File word count with spark sql");
 
         try (SparkSession spark = SparkSessionFactory.withConfAndKryo(conf)) {
-            Dataset<Row> inputDf = spark.read()
-                    .format("avro")
-                    .load(params.inputAvroPath);
+            AvroDataFrameSupport avroDataFrameSupport = new AvroDataFrameSupport(spark);
+
+            Dataset<Row> inputDf = avroDataFrameSupport
+                    .read(params.inputAvroPath, Person.SCHEMA$);
 
             int numberOfCopies = params.numberOfCopies;
             Dataset<Row> outputDf = inputDf
                     .withColumn("dummy", explode(sequence(lit(1), lit(numberOfCopies))))
                     .drop("dummy");
 
-            AvroSaver.save(outputDf, schema, params.outputAvroPath);
+            avroDataFrameSupport.write(
+                    spark.createDataFrame(outputDf.javaRDD(), (StructType) SchemaConverters.toSqlType(schema).dataType()),
+                    params.outputAvroPath,
+                    schema);
         }
     }
 
