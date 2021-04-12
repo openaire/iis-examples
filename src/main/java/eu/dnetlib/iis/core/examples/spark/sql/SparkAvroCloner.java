@@ -4,7 +4,8 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import eu.dnetlib.iis.common.spark.SparkSessionFactory;
-import eu.dnetlib.iis.common.spark.avro.AvroDataFrameSupport;
+import eu.dnetlib.iis.common.spark.avro.AvroDataFrameReader;
+import eu.dnetlib.iis.common.spark.avro.AvroDataFrameWriter;
 import eu.dnetlib.iis.common.utils.AvroUtils;
 import eu.dnetlib.iis.core.examples.schemas.documentandauthor.Person;
 import org.apache.avro.Schema;
@@ -47,9 +48,9 @@ public class SparkAvroCloner {
         conf.setAppName("File word count with spark sql");
 
         try (SparkSession spark = SparkSessionFactory.withConfAndKryo(conf)) {
-            AvroDataFrameSupport avroDataFrameSupport = new AvroDataFrameSupport(spark);
+            AvroDataFrameReader avroDataFrameReader = new AvroDataFrameReader(spark);
 
-            Dataset<Row> inputDf = avroDataFrameSupport
+            Dataset<Row> inputDf = avroDataFrameReader
                     .read(params.inputAvroPath, Person.SCHEMA$);
 
             int numberOfCopies = params.numberOfCopies;
@@ -57,10 +58,8 @@ public class SparkAvroCloner {
                     .withColumn("dummy", explode(sequence(lit(1), lit(numberOfCopies))))
                     .drop("dummy");
 
-            avroDataFrameSupport.write(
-                    spark.createDataFrame(outputDf.javaRDD(), (StructType) SchemaConverters.toSqlType(schema).dataType()),
-                    params.outputAvroPath,
-                    schema);
+            new AvroDataFrameWriter(spark.createDataFrame(outputDf.javaRDD(), (StructType) SchemaConverters.toSqlType(schema).dataType()))
+                    .write(params.outputAvroPath, schema);
         }
     }
 
