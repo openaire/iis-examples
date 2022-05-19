@@ -4,13 +4,14 @@ import eu.dnetlib.iis.common.AbstractOozieWorkflowTestCase;
 import eu.dnetlib.iis.common.OozieWorkflowTestConfiguration;
 import eu.dnetlib.iis.common.TestsIOUtils;
 import eu.dnetlib.iis.common.WorkflowTestResult;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author madryk
@@ -32,7 +33,7 @@ public class PersonIdExtractorWorkflowTest extends AbstractOozieWorkflowTestCase
                 .filter(x -> x.getFileName().toString().startsWith("part-00000"))
                 .collect(Collectors.toList());
 
-        Assert.assertEquals(1, files.size());
+        assertEquals(1, files.size());
         TestsIOUtils
                 .assertUtf8TextContentsEqual(
                         this.getClass().getResourceAsStream("/eu/dnetlib/iis/core/examples/simple_csv_data/person_id.csv"),

@@ -2,8 +2,7 @@ package eu.dnetlib.iis.core.examples.hadoopstreaming;
 
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Test;
 
 import eu.dnetlib.iis.common.AbstractOozieWorkflowTestCase;
 import eu.dnetlib.iis.common.IntegrationTest;
@@ -19,7 +18,7 @@ import eu.dnetlib.iis.core.examples.schemas.documenttext.DocumentText;
  * @author Mateusz Kobos
  *
  */
-@Category(IntegrationTest.class)
+@IntegrationTest
 public class WorkflowTest extends AbstractOozieWorkflowTestCase {
 
 	@Test

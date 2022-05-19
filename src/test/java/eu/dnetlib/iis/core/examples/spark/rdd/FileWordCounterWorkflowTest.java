@@ -5,17 +5,16 @@ import eu.dnetlib.iis.common.IntegrationTest;
 import eu.dnetlib.iis.common.OozieWorkflowTestConfiguration;
 import eu.dnetlib.iis.common.WorkflowTestResult;
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Łukasz Dumiszewski
  */
-@Category(IntegrationTest.class)
+@IntegrationTest
 public class FileWordCounterWorkflowTest extends AbstractOozieWorkflowTestCase {
 
     @Test

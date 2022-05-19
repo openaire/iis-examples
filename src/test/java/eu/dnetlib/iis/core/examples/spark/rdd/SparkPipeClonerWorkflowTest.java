@@ -2,13 +2,12 @@ package eu.dnetlib.iis.core.examples.spark.rdd;
 
 import eu.dnetlib.iis.common.AbstractOozieWorkflowTestCase;
 import eu.dnetlib.iis.common.IntegrationTest;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author madryk
  */
-@Category(IntegrationTest.class)
+@IntegrationTest
 public class SparkPipeClonerWorkflowTest extends AbstractOozieWorkflowTestCase {
 
     @Test

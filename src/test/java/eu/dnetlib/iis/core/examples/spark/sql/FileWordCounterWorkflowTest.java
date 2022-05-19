@@ -8,24 +8,23 @@ import eu.dnetlib.iis.common.spark.SparkSessionFactory;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Category(IntegrationTest.class)
+@IntegrationTest
 public class FileWordCounterWorkflowTest extends AbstractOozieWorkflowTestCase {
 
     private static SparkSession spark;
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         SparkConf conf = new SparkConf();
         conf.setMaster("local");
@@ -34,7 +33,7 @@ public class FileWordCounterWorkflowTest extends AbstractOozieWorkflowTestCase {
         spark = SparkSessionFactory.withConfAndKryo(conf);
     }
 
-    @AfterClass
+    @AfterAll
     public static void afterClass() {
         spark.stop();
     }

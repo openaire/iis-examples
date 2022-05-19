@@ -4,7 +4,7 @@ import eu.dnetlib.iis.common.AbstractOozieWorkflowTestCase;
 import eu.dnetlib.iis.common.OozieWorkflowTestConfiguration;
 import eu.dnetlib.iis.common.TestsIOUtils;
 import eu.dnetlib.iis.common.WorkflowTestResult;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
 

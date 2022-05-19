@@ -10,27 +10,27 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.PairFunction;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import scala.Option;
 import scala.Tuple2;
 
 import java.io.File;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
  * @author madryk
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SparkPipeExecutorTest {
 
     private SparkPipeExecutor pipeExecutor = new SparkPipeExecutor();
@@ -74,7 +74,7 @@ public class SparkPipeExecutorTest {
     @Captor
     private ArgumentCaptor<PairFunction<Document, AvroKey<GenericRecord>, NullWritable>> avroDocumentToAvroKeyValueFunctionArg;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         SparkEnv sparkEnv = mock(SparkEnv.class);
         when(sparkEnv.driverTmpDir()).thenReturn(Option.apply("/some/spark/dir"));

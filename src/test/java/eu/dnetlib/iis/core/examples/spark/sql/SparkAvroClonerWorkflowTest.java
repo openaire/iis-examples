@@ -6,17 +6,16 @@ import eu.dnetlib.iis.common.OozieWorkflowTestConfiguration;
 import eu.dnetlib.iis.common.WorkflowTestResult;
 import eu.dnetlib.iis.core.examples.schemas.documentandauthor.Person;
 import org.apache.avro.util.Utf8;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Łukasz Dumiszewski
  */
-@Category(IntegrationTest.class)
+@IntegrationTest
 public class SparkAvroClonerWorkflowTest extends AbstractOozieWorkflowTestCase {
 
     @Test
